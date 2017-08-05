@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CassandraTest">
+	<test name="CassandraTest">
+		<classes>
+			<class name="test.by.intexsoft.cassandraJpa.CassandraTest" />
+		</classes>
+	</test>
+</suite>
