@@ -50,7 +50,30 @@ public class CassandraService {
 	}
 
 	/**
-	 * This method return set objects from cassandra database
+	 * This method returns users where column first_name = first_name
+	 * 
+	 * @param first_name
+	 *            - users first name
+	 * @return List<User>
+	 */
+	public List<User> findByFirstname(String first_name) {
+		return repository.findByFirstname(first_name);
+	}
+
+	/**
+	 * This method returns users where column last_name = last_name. Warning: this
+	 * column in database must have index
+	 * 
+	 * @param last_name
+	 *            - users last name
+	 * @return List<User>
+	 */
+	public List<User> findByLastname(String last_name) {
+		return repository.findByLastname(last_name);
+	}
+
+	/**
+	 * This method return set objects from cassandra database.
 	 * 
 	 * @return Set<User>
 	 */
