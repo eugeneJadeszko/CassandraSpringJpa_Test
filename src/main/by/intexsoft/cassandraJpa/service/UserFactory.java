@@ -1,5 +1,6 @@
 package main.by.intexsoft.cassandraJpa.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class UserFactory {
 	@Value("${directory.incoming}")
 	private String incomingDir;
 
+	@Autowired
+	AddressFactory addressFactory;
+
 	private Utility utility = new FileUtilityImpl();
 	private ObjectMapper mapper = new ObjectMapper();
 
@@ -26,9 +30,12 @@ public class UserFactory {
 	 * @param quantity
 	 *            - Number of objects to create
 	 */
-	public void userCreate(int quantity) {
-		for (int counter = 0; counter < quantity; counter++) {
-			saveUserInFile(new User("first_name" + counter, "last_name" + counter), counter);
+	public void userCreate(Long quantity) {
+		for (Long counter = 0L; counter < quantity; counter++) {
+			saveUserInFile(
+//					new User(counter, "firstname" + counter, "lastname" + counter, addressFactory.addressCreate(3)),
+//					counter);
+					new User(counter, "firstname" + counter, "lastname" + counter, addressFactory.oneAddressCreate(3)), counter);
 		}
 	}
 
@@ -40,7 +47,7 @@ public class UserFactory {
 	 * @param counter
 	 *            - file number
 	 */
-	private void saveUserInFile(User user, int counter) {
+	private void saveUserInFile(User user, Long counter) {
 		try {
 			utility.write(incomingDir, "user" + counter + ".json", mapper.writeValueAsString(user), false);
 		} catch (JsonProcessingException e) {

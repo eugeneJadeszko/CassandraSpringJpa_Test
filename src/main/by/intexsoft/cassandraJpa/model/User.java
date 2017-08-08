@@ -1,38 +1,70 @@
 package main.by.intexsoft.cassandraJpa.model;
 
+import org.springframework.data.cassandra.mapping.CassandraType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
+import com.datastax.driver.core.DataType.Name;
+
 @Table(value = "user")
 public class User {
 	// @PrimaryKeyColumn(name = "first_name", type = PrimaryKeyType.PARTITIONED)
-	@PrimaryKey("first_name")
+	@PrimaryKey("id")
+	private Long id;
+	@Column("first_name")
 	private String firstname;
 	@Column(value = "last_name")
 	private String lastname;
+	@Column("addr")
+	// @CassandraType(userTypeName = "adresses", type = Name.MAP, typeArguments = {
+	// DataType.Name.TEXT, DataType.Name.UDT })
+	// @CassandraType(userTypeName = "address", type = Name.MAP)
+	// private Map<String, Address> addresses;
+	@CassandraType(userTypeName = "address", type = Name.UDT)
+	private Address address;
 
 	public User() {
 	}
 
-	public User(String first_name, String last_name) {
-		this.firstname = first_name;
-		this.lastname = last_name;
+	public User(Long id, String firstname, String lastname, Address address) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
 	}
 
-	public String getFirst_name() {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
 		return firstname;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.firstname = first_name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLast_name() {
+	public String getLastname() {
 		return lastname;
 	}
 
-	public void setLast_name(String last_name) {
-		this.lastname = last_name;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 }

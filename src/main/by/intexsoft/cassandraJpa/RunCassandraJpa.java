@@ -1,7 +1,5 @@
 package main.by.intexsoft.cassandraJpa;
 
-import java.util.List;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import main.by.intexsoft.cassandraJpa.model.User;
@@ -15,12 +13,15 @@ public class RunCassandraJpa {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
 				"main.by.intexsoft.cassandraJpa.config");
 		CassandraService service = context.getBean(CassandraService.class);
-		context.getBean(UserFactory.class).userCreate(5);
+		context.getBean(UserFactory.class).userCreate(3L);
 		context.getBean(FileManager.class).SaveAndMove();
-		service.findAll()
-				.forEach((User entity) -> System.out.println(entity.getFirst_name() + " " + entity.getLast_name()));
-		List<User> users = service.findByLastname("last_name1");
-		users.forEach((User user) -> System.out.println("\n" + user.getFirst_name() + ", " + user.getLast_name()));
+		service.findAll().forEach((User entity) -> showUserInfo(entity));
 		context.close();
+	}
+
+	private static void showUserInfo(User user) {
+		System.out.println(user.getId() + ", " + user.getFirstname() + ", " + user.getLastname() + ":");
+		System.out.println(user.getAddress());
+		System.out.println();
 	}
 }
