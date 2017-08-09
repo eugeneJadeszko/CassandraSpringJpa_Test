@@ -33,9 +33,8 @@ public class UserFactory {
 	public void userCreate(Long quantity) {
 		for (Long counter = 0L; counter < quantity; counter++) {
 			saveUserInFile(
-//					new User(counter, "firstname" + counter, "lastname" + counter, addressFactory.addressCreate(3)),
-//					counter);
-					new User(counter, "firstname" + counter, "lastname" + counter, addressFactory.oneAddressCreate(3)), counter);
+					new User(counter, "firstname" + counter, "lastname" + counter, addressFactory.oneAddressCreate(3)),
+					counter);
 		}
 	}
 

@@ -9,7 +9,6 @@ import com.datastax.driver.core.DataType.Name;
 
 @Table(value = "user")
 public class User {
-	// @PrimaryKeyColumn(name = "first_name", type = PrimaryKeyType.PARTITIONED)
 	@PrimaryKey("id")
 	private Long id;
 	@Column("first_name")
@@ -17,10 +16,6 @@ public class User {
 	@Column(value = "last_name")
 	private String lastname;
 	@Column("addr")
-	// @CassandraType(userTypeName = "adresses", type = Name.MAP, typeArguments = {
-	// DataType.Name.TEXT, DataType.Name.UDT })
-	// @CassandraType(userTypeName = "address", type = Name.MAP)
-	// private Map<String, Address> addresses;
 	@CassandraType(userTypeName = "address", type = Name.UDT)
 	private Address address;
 

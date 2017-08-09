@@ -20,8 +20,9 @@ public class RunCassandraJpa {
 	}
 
 	private static void showUserInfo(User user) {
-		System.out.println(user.getId() + ", " + user.getFirstname() + ", " + user.getLastname() + ":");
-		System.out.println(user.getAddress());
+		System.out.println("id: " + user.getId() + ", first name: " + user.getFirstname() + ", last name: "
+				+ user.getLastname() + ", address:");
+		System.out.println("\t" + user.getAddress());
 		System.out.println();
 	}
 }
