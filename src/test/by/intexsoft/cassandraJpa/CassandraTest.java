@@ -38,7 +38,7 @@ public class CassandraTest {
 	@BeforeClass
 	public void Config() throws JsonMappingException, BeansException, IOException {
 		context = new AnnotationConfigApplicationContext("main.by.intexsoft.cassandraJpa.config");
-		context.getBean(UserFactory.class).userCreate(10);
+		context.getBean(UserFactory.class).userCreate(10L);
 		context.getBean(FileManager.class).SaveAndMove();
 		cassandraSet = context.getBean(CassandraService.class).getSetFromCassandra();
 		sourceSet = context.getBean(FileManager.class).getSourceSet();
